@@ -1,0 +1,41 @@
+version: '3'
+services:
+  wallet:
+    build:
+      build:
+        context: .
+        args:
+          REPOSITORY: 'https://github.com/goacoincore/goacoin'
+          REF: master
+    restart: always
+    ports:
+      - '1947:1947'
+      - '1948:1948'
+    command:
+      - '-rpcuser=goacoin-wallet'
+      - '-rpcpassword=xnrqivbw'
+      - '-server=1'
+      - '-listen=0'
+    volumes:
+      - './wallet/:/home/goacoin/'
+  masternode:
+    build:
+      build:
+        context: .
+        args:
+          REPOSITORY: 'https://github.com/goacoincore/goacoin'
+          REF: master
+    restart: always
+    ports:
+      - '1947:1947'
+      - '1948:1948'
+    command:
+      - '-rpcuser=goacoin-mn01'
+      - '-rpcpassword=xnrqivbw'
+      - '-rpcallowip=::/0'
+      - '-server=0'
+      - '-listen=1'
+      - '-masternode=1'
+      - '-masternodeprivkey=YourMasternodePrivKey'
+    volumes:
+      - './masternode/:/home/goacoin/'

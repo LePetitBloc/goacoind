@@ -1,0 +1,44 @@
+file:
+  /usr/local/bin/goacoind:
+    exists: true
+    mode: '0755'
+    filetype: file
+  /usr/local/bin/goacoin-cli:
+    exists: true
+    mode: '0755'
+    filetype: file
+  /usr/local/bin/goacoin-tx:
+    exists: true
+    mode: '0755'
+    filetype: file
+  /home/goacoin/.goacoincore/goacoin.conf:
+    exists: true
+    filetype: file
+    contains:
+      - rpcuser
+      - rpcpassword
+  /home/goacoin/.goacoincore/masternode.conf:
+    exists: true
+    filetype: file
+    contains:
+      - Masternode config file
+  /home/goacoin/data:
+    filetype: directory
+    exists: true
+port:
+  'tcp:1947':
+    listening: true
+  'tcp:1948':
+    listening: true
+user:
+  goacoin:
+    exists: true
+    groups:
+      - goacoin
+    home: /home/goacoin
+group:
+  goacoin:
+    exists: true
+process:
+  goacoind:
+    running: true
